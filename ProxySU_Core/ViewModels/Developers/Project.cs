@@ -156,8 +156,14 @@ namespace ProxySU_Core.ViewModels.Developers
         /// </summary>
         protected void ConfigureSoftware()
         {
+            string cmd = RunCmd("command -v sudo");
+            if (string.IsNullOrEmpty(cmd))
+            {
+                RunCmd(GetInstallCmd("sudo"));
+            }
+
             // 安装curl,wget,unzip
-            string cmd = RunCmd("command -v curl");
+            cmd = RunCmd("command -v curl");
             if (string.IsNullOrEmpty(cmd))
             {
                 RunCmd(GetInstallCmd("curl"));
@@ -341,26 +347,32 @@ namespace ProxySU_Core.ViewModels.Developers
         /// </summary>
         protected void InstallCaddy()
         {
-            if (CmdType == CmdType.Apt)
-            {
-                RunCmd("sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https");
-                RunCmd("curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo apt-key add -");
-                RunCmd("curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee -a /etc/apt/sources.list.d/caddy-stable.list");
-                RunCmd("sudo apt update");
-                RunCmd("sudo apt install caddy");
-            }
-            else if (CmdType == CmdType.Dnf)
-            {
-                RunCmd("dnf install 'dnf-command(copr)'");
-                RunCmd("dnf copr enable @caddy/caddy");
-                RunCmd("dnf install caddy");
-            }
-            else if (CmdType == CmdType.Yum)
-            {
-                RunCmd("yum install yum-plugin-copr");
-                RunCmd("yum copr enable @caddy/caddy");
-                RunCmd("yum install caddy");
-            }
+            RunCmd("rm -rf caddy_install.sh");
+            RunCmd("curl -o caddy_install.sh https://raw.githubusercontent.com/proxysu/shellscript/master/Caddy-Naive/caddy-naive-install.sh");
+            RunCmd("yes | bash caddy_install.sh");
+
+            //if (CmdType == CmdType.Apt)
+            //{
+            //    RunCmd("sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https");
+            //    RunCmd("curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo apt-key add -");
+            //    RunCmd("curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee -a /etc/apt/sources.list.d/caddy-stable.list");
+            //    RunCmd(GetUpdateCmd());
+            //    RunCmd("sudo apt install caddy");
+            //}
+            //else if (CmdType == CmdType.Dnf)
+            //{
+            //    RunCmd("echo y | dnf install 'dnf-command(copr)'");
+            //    RunCmd("echo y | dnf copr enable @caddy/caddy");
+            //    RunCmd(GetUpdateCmd());
+            //    RunCmd("dnf install caddy");
+            //}
+            //else if (CmdType == CmdType.Yum)
+            //{
+            //    RunCmd("echo y | echo y | yum install yum-plugin-copr");
+            //    RunCmd("echo y | echo y | yum copr enable @caddy/caddy");
+            //    RunCmd(GetUpdateCmd());
+            //    RunCmd("yum install caddy");
+            //}
         }
 
 
@@ -399,7 +411,7 @@ namespace ProxySU_Core.ViewModels.Developers
             {
                 if (force)
                 {
-                    var btnResult = MessageBox.Show("80/443端口之一，或全部被占用，将强制停止占用80/443端口的程序?", "提示", MessageBoxButton.YesNo);
+                    var btnResult = MessageBox.Show($"{port}端口被占用，将强制停止占用{port}端口的程序?", "提示", MessageBoxButton.YesNo);
                     if (btnResult == MessageBoxResult.No)
                     {
                         throw new Exception($"{port}端口被占用，安装停止!");
@@ -518,15 +530,15 @@ namespace ProxySU_Core.ViewModels.Developers
         {
             if (CmdType == CmdType.Apt)
             {
-                return "apt-get update ";
+                return "echo y | apt-get update ";
             }
             else if (CmdType == CmdType.Dnf)
             {
-                return "dnf clean all;dnf makecache";
+                return "echo y | dnf update ";
             }
             else if (CmdType == CmdType.Yum)
             {
-                return "yum clean all;yum makecache";
+                return "echo y | yum update ";
             }
 
             throw new Exception("未识别的系统");
