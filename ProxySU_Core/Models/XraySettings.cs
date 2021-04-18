@@ -27,6 +27,8 @@ namespace ProxySU_Core.Models
 
             VLESS_WS_Path = "/vlessws";
             VLESS_H2_Path = "/vlessh2";
+            VLESS_KCP_Type = "none";
+            VLESS_KCP_Seed = guid;
             VLESS_gRPC_ServiceName = "xray_gRPC";
 
             VMESS_WS_Path = "/vmessws";
@@ -207,24 +209,24 @@ namespace ProxySU_Core.Models
         // 入口
         VLESS_TCP_XTLS = 100,
 
-        // vless 101开头
+        // VLESS 101开头
         VLESS_TCP = 101,
         VLESS_WS = 102,
         VLESS_H2 = 103,
         VLESS_KCP = 104,
         VLESS_gRPC = 110,
 
-        // vmess 201开头
+        // VMESS 201开头
         VMESS_TCP = 201,
         VMESS_WS = 202,
         VMESS_H2 = 203,
         VMESS_KCP = 204,
 
-        // trojan 301开头
+        // Trojan 301开头
         Trojan_TCP = 301,
         Trojan_WS = 302,
 
-        // ss
+        // SS
         ShadowsocksAEAD = 401
     }
 }

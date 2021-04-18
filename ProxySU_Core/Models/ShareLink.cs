@@ -21,6 +21,7 @@ namespace ProxySU_Core.Models
                 case XrayType.VLESS_TCP_XTLS:
                 case XrayType.VLESS_WS:
                 case XrayType.VLESS_KCP:
+                case XrayType.VLESS_gRPC:
                 case XrayType.Trojan_TCP:
                     return BuildVlessShareLink(xrayType, settings);
                 case XrayType.VMESS_TCP:
@@ -99,7 +100,7 @@ namespace ProxySU_Core.Models
             var _domain = settings.Domain;
             var _port = settings.Port;
             var _type = string.Empty;
-            var _encryption = string.Empty;
+            var _encryption = "none";
             var _security = "tls";
             var _path = "/";
             var _host = settings.Domain;
@@ -112,21 +113,18 @@ namespace ProxySU_Core.Models
                 case XrayType.VLESS_TCP:
                     _protocol = "vless";
                     _type = "tcp";
-                    _encryption = "none";
                     _descriptiveText = "vless-tcp-tls";
                     break;
                 case XrayType.VLESS_TCP_XTLS:
                     _protocol = "vless";
                     _type = "tcp";
                     _security = "xtls";
-                    _encryption = "none";
                     _descriptiveText = "vless-tcp-xtls";
                     break;
                 case XrayType.VLESS_WS:
                     _protocol = "vless";
                     _type = "ws";
                     _path = settings.VLESS_WS_Path;
-                    _encryption = "none";
                     _descriptiveText = "vless-ws-tls";
                     break;
                 case XrayType.VLESS_KCP:
@@ -135,6 +133,7 @@ namespace ProxySU_Core.Models
                     _headerType = settings.VLESS_KCP_Type;
                     _seed = settings.VLESS_KCP_Seed;
                     _port = settings.VLESS_KCP_Port;
+                    _security = "none";
                     _descriptiveText = "vless-mKCP";
                     break;
                 case XrayType.VLESS_gRPC:
