@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MvvmCross.Platforms.Wpf.Views;
+using ProxySuper.Core.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,19 +12,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProxySuper.WPF.Controls
+namespace ProxySuper.WPF.Views
 {
     /// <summary>
-    /// VMESS_KCP_Control.xaml 的交互逻辑
+    /// TrojanGoConfigView.xaml 的交互逻辑
     /// </summary>
-    public partial class VMESS_KCP_Control : UserControl
+    public partial class TrojanGoConfigView : MvxWindow
     {
-        public VMESS_KCP_Control()
+        public TrojanGoConfigView()
         {
             InitializeComponent();
+        }
+
+        public new TrojanGoConfigViewModel ViewModel
+        {
+            get
+            {
+                return (TrojanGoConfigViewModel)base.ViewModel;
+            }
         }
     }
 }
