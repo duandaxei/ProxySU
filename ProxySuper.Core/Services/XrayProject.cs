@@ -98,13 +98,14 @@ namespace ProxySuper.Core.Services
             {
                 var errorLog = "安装终止，" + ex.Message;
                 WriteOutput(errorLog);
-                MessageBox.Show(errorLog);
+                MessageBox.Show("安装失败，请联系开发者或上传日志文件(Logs文件夹下)到github提问。");
             }
         }
 
         public void UninstallProxy()
         {
             EnsureRootAuth();
+            EnsureSystemEnv();
             WriteOutput("卸载Caddy");
             UninstallCaddy();
             WriteOutput("卸载Xray");
@@ -153,6 +154,7 @@ namespace ProxySuper.Core.Services
         public void DoUninstallCaddy()
         {
             EnsureRootAuth();
+            EnsureSystemEnv();
             UninstallCaddy();
             WriteOutput("************ 卸载Caddy完成 ************");
         }
