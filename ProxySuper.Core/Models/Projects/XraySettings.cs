@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using ProxySuper.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +22,13 @@ namespace ProxySuper.Core.Models.Projects
             UUID = guid;
             Types = new List<XrayType>();
 
-            VLESS_WS_Path = "/vlessws";
+            VLESS_WS_Path = "/" + Utils.RandomString(6);
             VLESS_KCP_Type = "none";
             VLESS_KCP_Seed = guid;
-            VLESS_gRPC_ServiceName = "xray_gRPC";
+            VLESS_gRPC_ServiceName = "/" + Utils.RandomString(7);
 
-            VMESS_WS_Path = "/vmessws";
-            VMESS_TCP_Path = "/vmesstcp";
+            VMESS_WS_Path = "/" + Utils.RandomString(8);
+            VMESS_TCP_Path = "/" + Utils.RandomString(9);
             VMESS_KCP_Seed = guid;
             VMESS_KCP_Type = "none";
 
@@ -46,6 +47,7 @@ namespace ProxySuper.Core.Models.Projects
                     VLESS_KCP_Port,
                     VMESS_KCP_Port,
                     ShadowSocksPort,
+                    VLESS_gRPC_Port,
                 };
             }
         }
