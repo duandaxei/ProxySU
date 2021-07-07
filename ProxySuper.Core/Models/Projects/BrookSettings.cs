@@ -10,6 +10,8 @@ namespace ProxySuper.Core.Models.Projects
     {
         public string Domain { get; set; }
 
+        public string IP { get; set; }
+
         public string Password { get; set; }
 
         public BrookType BrookType { get; set; }
@@ -20,10 +22,11 @@ namespace ProxySuper.Core.Models.Projects
         {
             get
             {
-                return new List<int>()
+                if (Port == 443)
                 {
-                    Port
-                };
+                    return new List<int> { 80, 443 };
+                }
+                return new List<int> { Port };
             }
         }
 
