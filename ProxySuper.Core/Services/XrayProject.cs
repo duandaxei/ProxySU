@@ -60,11 +60,15 @@ namespace ProxySuper.Core.Services
                 ConfigFirewalld();
                 WriteOutput("防火墙配置完成");
 
+                WriteOutput("检测网络环境");
+                EnsureIP();
+                WriteOutput("检测网络环境完成");
+
                 WriteOutput("同步系统和本地时间...");
                 SyncTimeDiff();
                 WriteOutput("时间同步完成");
 
-                if (Parameters.WithTLS)
+                if (!Parameters.IsIPAddress)
                 {
                     WriteOutput("检测域名是否绑定本机IP...");
                     ValidateDomain();
@@ -292,7 +296,7 @@ namespace ProxySuper.Core.Services
                 RunCmd(@"mv /usr/local/etc/xray/config.json /usr/local/etc/xray/config.json.1");
             }
 
-            if (Parameters.WithTLS)
+            if (!Parameters.IsIPAddress)
             {
                 WriteOutput("安装TLS证书");
                 InstallCertToXray();
