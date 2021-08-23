@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using ProxySuper.Core.Models.Hosts;
 using ProxySuper.Core.Models.Projects;
 using ProxySuper.Core.Services;
+using System;
 using System.Text;
 
 namespace ProxySuper.Core.Models
@@ -47,6 +48,9 @@ namespace ProxySuper.Core.Models
         [JsonProperty("brook")]
         public BrookSettings BrookSettings { get; set; }
 
+        [JsonProperty("mtProxyGoSettings")]
+        public MTProxyGoSettings MTProxyGoSettings { get; set; }
+
 
         [JsonIgnore]
         public ProjectType Type
@@ -60,6 +64,8 @@ namespace ProxySuper.Core.Models
                 if (TrojanGoSettings != null) return ProjectType.TrojanGo;
 
                 if (NaiveProxySettings != null) return ProjectType.NaiveProxy;
+
+                if (MTProxyGoSettings != null) return ProjectType.MTProxyGo;
 
                 return ProjectType.Brook;
             }
@@ -78,6 +84,9 @@ namespace ProxySuper.Core.Models
                 RaisePropertyChanged("IsChecked");
             }
         }
+
+        [JsonIgnore]
+        public Action OnSave { get; set; } = () => { };
 
         public string GetShareLink()
         {
