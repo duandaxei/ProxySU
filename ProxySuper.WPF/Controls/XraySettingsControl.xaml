@@ -26,22 +26,13 @@
                             <Style TargetType="CheckBox">
                                 <Setter Property="IsEnabled" Value="True" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_RAW_XTLS}" Value="True">
-                                        <Setter Property="IsEnabled" Value="False" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_RAW}" Value="True">
-                                        <Setter Property="IsEnabled" Value="False" />
-                                    </DataTrigger>
                                     <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_XHTTP}" Value="True">
                                         <Setter Property="IsEnabled" Value="False" />
                                     </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_RAW_XTLS}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
                                     <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_WS}" Value="True">
-                                        <Setter Property="IsEnabled" Value="False" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_gRPC}" Value="True">
-                                        <Setter Property="IsEnabled" Value="False" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding IsChecked, ElementName=ShadowSocks}" Value="True">
                                         <Setter Property="IsEnabled" Value="False" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding IsChecked, ElementName=Trojan_TCP}" Value="True">
@@ -64,6 +55,9 @@
                                     <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_XTLS_RAW_REALITY}" Value="True">
                                         <Setter Property="IsEnabled" Value="False" />
                                     </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_XHTTP}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </CheckBox.Style>
@@ -71,7 +65,7 @@
                     </CheckBox>
 
                     <!--RAW(TCP)-->
-                    <CheckBox x:Name="VLESS_RAW"
+                    <!--<CheckBox x:Name="VLESS_RAW"
                               VerticalContentAlignment="Center"
                               IsChecked="{Binding Path=Checked_VLESS_RAW}">
                         <CheckBox.Style>
@@ -85,7 +79,7 @@
                             </Style>
                         </CheckBox.Style>
                         <Label Content="VLESS RAW"  FontSize="12" Foreground="LimeGreen" />
-                    </CheckBox>
+                    </CheckBox>-->
 
 
 
@@ -111,22 +105,31 @@
 
                 <!--#region VLESS -->
                 <WrapPanel Orientation="Vertical">
-                        <CheckBox x:Name="VLESS_XHTTP"
+                    <CheckBox x:Name="VLESS_XHTTP"
                                     VerticalContentAlignment="Center"
                                     IsChecked="{Binding Path=Checked_VLESS_XHTTP}">
-                            <CheckBox.Style>
-                                <Style TargetType="CheckBox">
-                                    <Setter Property="IsEnabled" Value="True" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_XTLS_RAW_REALITY}" Value="True">
-                                            <Setter Property="IsEnabled" Value="False" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </CheckBox.Style>
-                            <Label Content="VLESS XHTTP"  FontSize="12"  Foreground="LimeGreen" />
-                        </CheckBox>
-                    
+                        <CheckBox.Style>
+                            <Style TargetType="CheckBox">
+                                <Setter Property="IsEnabled" Value="True" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_XTLS_RAW_REALITY}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_RAW_XTLS}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_WS}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=Trojan_TCP}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </CheckBox.Style>
+                        <Label Content="VLESS XHTTP"  FontSize="12"  Foreground="LimeGreen" />
+                    </CheckBox>
+
                     <!--WebSocket-->
                     <CheckBox x:Name="VLESS_WS"
                               VerticalContentAlignment="Center"
@@ -136,6 +139,9 @@
                                 <Setter Property="IsEnabled" Value="True" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_XTLS_RAW_REALITY}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_XHTTP}" Value="True">
                                         <Setter Property="IsEnabled" Value="False" />
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -149,16 +155,6 @@
                               VerticalContentAlignment="Center"
                               Foreground="LimeGreen"
                               IsChecked="{Binding Path=Checked_VLESS_gRPC}">
-                        <CheckBox.Style>
-                            <Style TargetType="CheckBox">
-                                <Setter Property="IsEnabled" Value="True" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_XTLS_RAW_REALITY}" Value="True">
-                                        <Setter Property="IsEnabled" Value="False" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </CheckBox.Style>
                         <Label Content="VLESS gRPC" FontSize="12" Foreground="LimeGreen" />
                     </CheckBox>
 
@@ -191,16 +187,6 @@
                     <CheckBox x:Name="ShadowSocks"
                       VerticalContentAlignment="Center"
                       IsChecked="{Binding Path=CheckedShadowSocks}">
-                        <CheckBox.Style>
-                            <Style TargetType="CheckBox">
-                                <Setter Property="IsEnabled" Value="True" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_XTLS_RAW_REALITY}" Value="True">
-                                        <Setter Property="IsEnabled" Value="False" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </CheckBox.Style>
                         <Label Content="ShadowSocks" FontSize="12"  Foreground="Fuchsia" />
                     </CheckBox>
 
@@ -214,6 +200,9 @@
                                 <Setter Property="IsEnabled" Value="True" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_XTLS_RAW_REALITY}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=VLESS_XHTTP}" Value="True">
                                         <Setter Property="IsEnabled" Value="False" />
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -281,7 +270,7 @@
                                           ItemsSource="{Binding Path=UTLSList}"
                                           SelectedValue="{Binding UTLS,Mode=TwoWay}" />
                             </StackPanel>
-                            
+
                             <!--Cert-->
                             <StackPanel Margin="0,15,0,0" 
                                         Orientation="Horizontal">
@@ -378,104 +367,6 @@
                             </StackPanel>
                             <!--#endregion-->
 
-                            <!--#region VLESS KCP SETTINGS -->
-                            <!--seed-->
-                            <StackPanel Margin="0,15,0,0"
-                                        Orientation="Horizontal"
-                                        d:Visibility="Visible"
-                                        Visibility="{
-                                            Binding Path=Checked_VLESS_KCP,
-                                            Converter={StaticResource VisibleConverter}
-                                        }">
-                                <Label Content="{DynamicResource VlessKcpSeed}" Foreground="LimeGreen" Width="120" />
-                                <TextBox Text="{Binding Path=VLESS_KCP_Seed}" Width="260"  />
-                            </StackPanel>
-
-                            <!--kcp type-->
-                            <StackPanel Margin="0,15,0,0"
-                                        d:Visibility="Visible"
-                                        Visibility="{
-                                            Binding Path=Checked_VLESS_KCP,
-                                            Converter={StaticResource VisibleConverter}
-                                        }"
-                                        Orientation="Horizontal">
-                                <Label Content="{DynamicResource VlessKcpType}"  Foreground="LimeGreen" Width="120" />
-                                <ComboBox Width="260" 
-                                ItemsSource="{Binding Path=KcpTypes}"
-                                SelectedValue="{Binding VLESS_KCP_Type,Mode=TwoWay}">
-                                </ComboBox>
-                            </StackPanel>
-
-                            <!--kcp port-->
-                            <StackPanel Margin="0,15,0,0"
-                                        d:Visibility="Visible"
-                                        Visibility="{
-                                            Binding Path=Checked_VLESS_KCP,
-                                            Converter={StaticResource VisibleConverter}
-                                        }" 
-                                        Orientation="Horizontal">
-                                <Label Content="{DynamicResource VlessKcpPort}" Width="120"  Foreground="LimeGreen" />
-                                <TextBox Text="{Binding Path=VLESS_KCP_Port}" Width="260"  />
-                            </StackPanel>
-                            <!--#endregion-->
-
-                            <!--#region VLESS Quic Settings -->
-                            <!--quic port-->
-                            <StackPanel Margin="0,15,0,0"
-                                        Orientation="Horizontal"
-                                        d:Visibility="Visible"
-                                        Visibility="{
-                                            Binding Path=Checked_VLESS_QUIC,
-                                            Converter={StaticResource VisibleConverter}
-                                        }">
-                                <Label Content="{DynamicResource VlessQuicPort}"  Foreground="LimeGreen" Width="120" />
-                                <TextBox Text="{Binding Path=VLESS_QUIC_Port}" Width="260" />
-                            </StackPanel>
-
-                            <!--quic key-->
-                            <StackPanel Margin="0,15,0,0"
-                                        Orientation="Horizontal"
-                                        d:Visibility="Visible"
-                                        Visibility="{
-                                            Binding Path=Checked_VLESS_QUIC,
-                                            Converter={StaticResource VisibleConverter}
-                                        }">
-                                <Label Content="{DynamicResource VlessQuicKey}"  Foreground="LimeGreen" Width="120" />
-                                <TextBox Text="{Binding Path=VLESS_QUIC_Key}" Width="260" />
-                            </StackPanel>
-
-                            <!--quic security-->
-                            <StackPanel Margin="0,15,0,0" 
-                                        Orientation="Horizontal" 
-                                        d:Visibility="Visible"
-                                        Visibility="{
-                                            Binding Path=Checked_VLESS_QUIC,
-                                            Converter={StaticResource VisibleConverter}
-                                        }">
-                                <Label Content="{DynamicResource VlessQuicSecurity}" Foreground="LimeGreen" Width="120" />
-                                <ComboBox Width="260"
-                                ItemsSource="{Binding QuicSecurities}"
-                                SelectedValue="{Binding VLESS_QUIC_Security}">
-                                </ComboBox>
-                            </StackPanel>
-
-                            <!--quic type-->
-                            <StackPanel Margin="0,15,0,0"
-                                        Orientation="Horizontal"
-                                        d:Visibility="Visible"
-                                        Visibility="{
-                                            Binding Path=Checked_VLESS_QUIC,
-                                            Converter={StaticResource VisibleConverter}
-                                        }">
-                                <Label Content="{DynamicResource VlessQuicType}" Foreground="LimeGreen" Width="120" VerticalAlignment="Bottom"/>
-                                <ComboBox Width="260" 
-                                            VerticalAlignment="Bottom"
-                                            ItemsSource="{Binding Path=QuicTypes}"
-                                            SelectedValue="{Binding VLESS_QUIC_Type,Mode=TwoWay}">
-                                </ComboBox>
-                            </StackPanel>
-                            <!--#endregion-->
-
                             <!--#region VLESS GRPC SETTINGS -->
                             <!--gRPC Port-->
                             <StackPanel Margin="0,15,0,0"
@@ -498,22 +389,6 @@
                                         }">
                                 <Label Content="{DynamicResource VlessRPCName}" Width="120"  Foreground="LimeGreen" />
                                 <TextBox Text="{Binding Path=VLESS_gRPC_ServiceName}" Width="260"  />
-                            </StackPanel>
-                            <!--#endregion-->
-
-                            <!--#region VMESS WS SETTINGS -->
-                            <!--WebSocket Path-->
-                            <StackPanel Margin="0,15,0,0" 
-                                        Orientation="Horizontal"
-                                        d:Visibility="Visible"
-                                        Visibility="{
-                                            Binding Path=Checked_VMESS_WS,
-                                            Converter={StaticResource VisibleConverter}
-                                        }">
-                                <Label Content="{DynamicResource VmessWsPath}" Foreground="Blue"  Width="120" />
-                                <TextBox Text="{Binding Path=VMESS_WS_Path}"
-                                        VerticalAlignment="Bottom"
-                                        Width="260" />
                             </StackPanel>
                             <!--#endregion-->
 
@@ -556,63 +431,6 @@
                                         }">
                                 <Label Content="{DynamicResource VmessKcpPort}"  Foreground="Blue" Width="120" />
                                 <TextBox Text="{Binding Path=VMESS_KCP_Port}" Width="260" />
-                            </StackPanel>
-                            <!--#endregion-->
-
-                            <!--#region VMESS Quic Settings -->
-                            <!--quic port-->
-                            <StackPanel Margin="0,15,0,0"
-                                        Orientation="Horizontal"
-                                        d:Visibility="Visible"
-                                        Visibility="{
-                                            Binding Path=Checked_VMESS_QUIC,
-                                            Converter={StaticResource VisibleConverter}
-                                        }">
-                                <Label Content="{DynamicResource VmessQuicPort}"  Foreground="Blue" Width="120" />
-                                <TextBox Text="{Binding Path=VMESS_QUIC_Port}" Width="260" />
-                            </StackPanel>
-
-                            <!--quic key-->
-                            <StackPanel Margin="0,15,0,0"
-                                        Orientation="Horizontal"
-                                        d:Visibility="Visible"
-                                        Visibility="{
-                                            Binding Path=Checked_VMESS_QUIC,
-                                            Converter={StaticResource VisibleConverter}
-                                        }">
-                                <Label Content="{DynamicResource VmessQuicKey}"  Foreground="Blue" Width="120" />
-                                <TextBox Text="{Binding Path=VMESS_QUIC_Key}" Width="260" />
-                            </StackPanel>
-
-                            <!--quic security-->
-                            <StackPanel Margin="0,15,0,0" 
-                                        Orientation="Horizontal" 
-                                        d:Visibility="Visible"
-                                        Visibility="{
-                                            Binding Path=Checked_VMESS_QUIC,
-                                            Converter={StaticResource VisibleConverter}
-                                        }">
-                                <Label Content="{DynamicResource VmessQuicSecurity}" Foreground="Blue" Width="120" />
-                                <ComboBox Width="260"
-                                ItemsSource="{Binding QuicSecurities}"
-                                SelectedValue="{Binding VMESS_QUIC_Security}">
-                                </ComboBox>
-                            </StackPanel>
-
-                            <!--quic type-->
-                            <StackPanel Margin="0,15,0,0"
-                                        Orientation="Horizontal"
-                                        d:Visibility="Visible"
-                                        Visibility="{
-                                            Binding Path=Checked_VMESS_QUIC,
-                                            Converter={StaticResource VisibleConverter}
-                                        }">
-                                <Label Content="{DynamicResource VmessQuicType}" Foreground="Blue" Width="120" VerticalAlignment="Bottom"/>
-                                <ComboBox Width="260" 
-                                            VerticalAlignment="Bottom"
-                                            ItemsSource="{Binding Path=QuicTypes}"
-                                            SelectedValue="{Binding VMESS_QUIC_Type,Mode=TwoWay}">
-                                </ComboBox>
                             </StackPanel>
                             <!--#endregion-->
 
